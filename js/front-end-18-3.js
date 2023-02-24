@@ -7,24 +7,28 @@
   // 小分類
   let cate2 = [];
 
-  //　商品一覧
+  // 商品一覧
   let itemList = [];
   
   //--- 共通で使用する要素を取得 ---
   // 大分類のselectをid属性により取得
-  let cate1Element = document.getElementById('mainMenu');
+  //let cate1Element = document.getElementById('mainMenu');
+  let cate1Element = $('#mainMenu');
   
   // 小分類のselectをid属性により取得
-  let cate2Element = document.getElementById('subMenu');
+  //let cate2Element = document.getElementById('subMenu');
+  let cate2Element = $('#subMenu');
   
   // 商品リストを表示する要素を取得
-  let itemListElement = document.getElementById('itemList');
+  //let itemListElement = document.getElementById('itemList');
+  let itemListElement = $('#itemList');
   
   //--- 定義した関数 ---
   // 大分類のoptionを追加する関数
   function setMainMenu() {
     // 取得したselectの子要素（option）を空白にすることによってすべて削除
-    cate1Element.innerHTML = '';
+    //cate1Element.inner = "";
+    cate1Element.text('');
   
     // 大分類の配列に保存されている数だけoptionとして追加する
     for (let i = 0; i < cate1.length; i++) {
@@ -39,7 +43,8 @@
   // 小分類のoptionを追加する関数
   function setSubMenu(idx) {
     // 取得したselectの子要素（option）を空白にすることによってすべて削除
-    cate2Element.innerHTML = '';
+    //cate2Element.inner = "";
+    cate2Element.text('');
   
     // 大分類の配列に保存されている数だけoptionとして追加する
     for (let i = 0; i < cate2[idx].length; i++) {
@@ -53,15 +58,16 @@
   
   // 商品一覧をtableとして表示
   function viewItemList(tag) {
-    let target = document.getElementById('itemList');
-  
+    //let target = document.getElementById('itemList');
+    let target = $('#itemList');
     // 商品一覧を削除
-    target.innerHTML = '';
+    //target.inner = "";
+    target.text('');
   
     if (tag !== undefined) {
         let html = '';
         html += '<table>';
-        let count = 0;
+        let count = 1;
         for (let i = 0; i < itemList.length; i++) {
             if (itemList[i].tags.some(t => t === tag)) {
                 if (count === 0) {
@@ -85,8 +91,8 @@
             }
         }
         if (count > 0) html += '</tr>'; // 最後に閉じる
-        html += '</table>'
-        target.innerHTML = html;
+        html += '</table>';
+        target.text(html);
     }
   }
   
@@ -97,7 +103,7 @@
     let idx = cate1Element.selectedIndex;
     // 大分類の選択に合わせて、小分類の生成
     setSubMenu(idx);
-    //　小分類が選択されたときに、最初に表示される値
+    // 小分類が選択されたときに、最初に表示される値
     viewItemList(cate2[idx][0]);
   });
   
@@ -110,6 +116,7 @@
   });
 
   //大分類一覧をファイルから取得
+  /* global $ */
   $(function () {
     $.ajax({
         url: 'json/cate1.json',
