@@ -1,4 +1,5 @@
 
+$(function() {
   
   //--- データの定義 ---
   // 大分類
@@ -98,7 +99,7 @@
   
   //--- イベントリスナーの定義 ---
   // 大分類の選択された時のイベントリスナー
-  cate1Element.addEventListener('change', function(){
+  $(cate1Element).on('change', function(){
     // 選択されば番号を取得
     let idx = cate1Element.selectedIndex;
     // 大分類の選択に合わせて、小分類の生成
@@ -108,7 +109,7 @@
   });
   
   // 小分類の選択された時のイベントリスナー
-  cate2Element.addEventListener('change', function(){
+  $(cate2Element).on('change', function(){
     // 選択されば値を取得
     let val = cate2Element.value;
     viewItemList(val);
@@ -117,7 +118,6 @@
 
   //大分類一覧をファイルから取得
   /* global $ */
-  $(function () {
     $.ajax({
         url: 'json/cate1.json',
         dataType: 'json',
@@ -128,10 +128,8 @@
     .fail(function(){
         alert("大分類のファイルが読み込めませんでした");
     });
-  });
 
-  //小分類一覧をファイルから取得
-  $(function () {
+    //小分類一覧をファイルから取得
     $.ajax({
         url: 'json/cate2.json',
         dataType: 'json',
@@ -142,10 +140,8 @@
     .fail(function(){
         alert("小分類のファイルが読み込めませんでした");
     });
-  });
 
-  // 商品一覧をファイルから取得
-  $(function () {
+    // 商品一覧をファイルから取得
     $.ajax({
         url:'json/item-18.json',
         dataType: 'json',
@@ -158,4 +154,4 @@
     .fail(function(){
         alert("商品一覧のファイルが読み込めませんでした");
     });
-  });
+});
